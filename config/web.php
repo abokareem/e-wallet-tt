@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$routes = require __DIR__ . '/routes.php';
 
 $config = [
     'id' => 'basic',
@@ -47,8 +48,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,
-            'rules' => [
-            ],
+            'rules' => $routes,
         ],
     ],
     'modules' => [

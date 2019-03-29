@@ -9,12 +9,24 @@ use yii\rest\Controller;
  */
 class ClientController extends Controller
 {
-    /**
-     * Renders the index view for the module
-     * @return mixed
-     */
-    public function actionIndex()
+
+    public function actionList()
     {
-        return ['asdas' => [1,2,3]];
+        return [];
+    }
+
+    public function actionItem($id)
+    {
+        return 'item: $id';
+    }
+
+    public function actionCreate()
+    {
+        return 'post works!';
+    }
+
+    public function actionUpdate($id)
+    {
+        return "put works: $id";
     }
 }
