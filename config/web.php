@@ -9,7 +9,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -49,6 +49,12 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
             ],
+        ],
+    ],
+    'modules' => [
+        'api' => [
+            'class' => app\modules\api\Module::class,
+            'defaultRoute' => 'client',
         ],
     ],
     'params' => $params,
