@@ -2,7 +2,10 @@
 
 namespace app\modules\api\controllers;
 
+use app\modules\api\models\Currency;
+use Yii;
 use yii\rest\Controller;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `api` module
@@ -17,7 +20,16 @@ class CurrencyController extends Controller
 
     public function actionUpdate()
     {
-        return 'update';
+        $model = new Currency();
+
+        $model->load(Yii::$app->request->post(), '');
+        $model->file = UploadedFile::getInstanceByName('file');
+
+        if ($model->tryLoad()) {
+            return ['status' => 'ok'];
+        }
+
+        return $model->errors;
     }
 
 }
