@@ -13,16 +13,29 @@ $this->title = 'Report page';
 
 <div class="site-index">
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'filterModel' => null,
+        'showFooter' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'amount',
-            'amount_in_usd',
+            [
+                'attribute' => 'amount',
+                'value' => 'amount',
+                'footer' => array_sum(array_map(function ($model) {
+                    return $model->amount;
+                }, $dataProvider->models)),
+            ],
+            [
+                'attribute' => 'amount_in_usd',
+                'value' => 'amount_in_usd',
+                'footer' => array_sum(array_map(function ($model) {
+                    return $model->amount_in_usd;
+                }, $dataProvider->models)),
+            ],
             [
                 'attribute' => 'wallet_from',
                 'value' => function ($model) {
