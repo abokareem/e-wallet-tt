@@ -12,12 +12,22 @@ use Yii;
  */
 class Currency extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'currency';
+    }
+
+    /**
+     * @param string $name
+     * @return Currency|null
+     */
+    public static function getCurrencyByName($name)
+    {
+        return self::findOne(['name' => strtoupper($name)]);
     }
 
     /**

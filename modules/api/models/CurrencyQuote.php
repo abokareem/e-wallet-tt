@@ -19,7 +19,7 @@ class CurrencyQuote extends Model
         $model->currency = $currency;
         $model->quote = $quote;
 
-        if (($dbCurrency = DBCurrency::findOne(['name' => $currency])) !== null)
+        if (($dbCurrency = DBCurrency::getCurrencyByName($currency)) !== null)
             $model->currency_id = $dbCurrency->id;
         else
             throw new InvalidArgumentException();

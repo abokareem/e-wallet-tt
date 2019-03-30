@@ -2,7 +2,7 @@
 
 namespace app\models\db;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "client".
@@ -11,8 +11,9 @@ use Yii;
  * @property string $name
  * @property string $country
  * @property string $city
+ * @property Wallet[] $wallets
  */
-class Client extends \yii\db\ActiveRecord
+class Client extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -45,5 +46,10 @@ class Client extends \yii\db\ActiveRecord
             'country' => 'Country',
             'city' => 'City',
         ];
+    }
+
+    public function getWallets()
+    {
+        return $this->hasMany(Wallet::class, ['client_id' => 'id']);
     }
 }
