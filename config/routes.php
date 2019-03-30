@@ -17,7 +17,7 @@ return [
         'pluralize' => false,
         'controller' => ['api/transfer'],
         'extraPatterns' => [
-            'POST <id:\w+>' => 'debit',
+            'POST <id:\w+>' => 'replenish',
             'POST ' => 'transaction',
         ],
     ],

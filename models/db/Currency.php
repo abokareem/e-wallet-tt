@@ -2,13 +2,12 @@
 
 namespace app\models\db;
 
-use Yii;
-
 /**
  * This is the model class for table "currency".
  *
  * @property int $id
  * @property string $name
+ * @property CurrencyQuote $latterQuote
  */
 class Currency extends \yii\db\ActiveRecord
 {
@@ -51,5 +50,12 @@ class Currency extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
+    }
+
+    public function getLatterQuote()
+    {
+        return $this->hasOne(CurrencyQuote::class, ['currency_id' => 'id'])
+            ->andWhere(['<=', 'date', date('Y-m-d')])
+            ->orderBy(['id' => SORT_DESC]);
     }
 }

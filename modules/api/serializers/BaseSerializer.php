@@ -19,8 +19,8 @@ abstract class BaseSerializer
     public $attributes = null;
     public $is_many = false;
 
-    protected $data;
     protected $serialized_data;
+    protected $data;
     protected $_meta = null;
 
     public function __construct($data, $is_many = false)
@@ -42,12 +42,15 @@ abstract class BaseSerializer
         $this->serialize();
     }
 
-    public function getData()
+    public function getData($withMeta = true)
     {
-        return [
-            'data' => $this->serialized_data,
-            '_meta' => $this->_meta,
-        ];
+        if ($withMeta)
+            return [
+                'data' => $this->serialized_data,
+                '_meta' => $this->_meta,
+            ];
+
+        return $this->serialized_data;
     }
 
     protected function serialize()

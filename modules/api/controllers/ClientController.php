@@ -6,6 +6,7 @@ use app\models\db\Client as DBClient;
 use app\modules\api\models\Client;
 use app\modules\api\serializers\ClientSerializer;
 use app\modules\api\serializers\ClientWalletSerializer;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\rest\Controller;
 use yii\web\NotFoundHttpException;
@@ -43,7 +44,7 @@ class ClientController extends Controller
     {
         $model = new Client();
 
-        if ($model->load($this->app->request->post(), '') && $model->validate()) {
+        if ($model->load(Yii::$app->request->post(), '') && $model->validate()) {
             $wallet = $model->createWallet();
             return (new ClientWalletSerializer($wallet))->getData();
         }
