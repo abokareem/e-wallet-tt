@@ -5,7 +5,8 @@ $db = require __DIR__ . '/db.php';
 $routes = require __DIR__ . '/routes.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'e-wallet',
+    'name' => 'E-Wallet',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
