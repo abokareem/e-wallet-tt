@@ -8,7 +8,6 @@ use app\modules\api\serializers\ClientSerializer;
 use app\modules\api\serializers\ClientWalletSerializer;
 use yii\data\ActiveDataProvider;
 use yii\rest\Controller;
-use yii\web\Application;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -16,16 +15,6 @@ use yii\web\NotFoundHttpException;
  */
 class ClientController extends Controller
 {
-    /** @var Application */
-    private $app;
-
-    public function init()
-    {
-        parent::init();
-
-        $this->app = \Yii::$app;
-    }
-
 
     public function actionList()
     {

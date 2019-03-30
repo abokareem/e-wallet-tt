@@ -4,9 +4,6 @@ namespace app\modules\api\controllers;
 
 use yii\rest\Controller;
 
-/**
- * Default controller for the `api` module
- */
 class TransferController extends Controller
 {
 
@@ -17,7 +14,7 @@ class TransferController extends Controller
 
     public function actionDebit($id)
     {
-        return 'item: $id';
+        return "item: $id";
     }
 
 }

@@ -7,9 +7,7 @@ use Yii;
 use yii\rest\Controller;
 use yii\web\UploadedFile;
 
-/**
- * Default controller for the `api` module
- */
+
 class CurrencyController extends Controller
 {
 
