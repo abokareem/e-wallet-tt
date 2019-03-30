@@ -1,1 +1,1 @@
-# e-wallet-tt
+Postman link: https://www.getpostman.com/collections/80873b099699f76597d9
