@@ -22,6 +22,6 @@ class ClientSerializer extends BaseSerializer
         $dataProvider = new ActiveDataProvider([
             'query' => $model->getWallets(),
         ]);
-        return (new WalletSerializer($dataProvider, true))->getData();
+        return (new WalletSerializer($dataProvider, true))->getData(false);
     }
 }

@@ -18,7 +18,7 @@ return [
         'controller' => ['api/transfer'],
         'extraPatterns' => [
             'POST <id:\w+>' => 'replenish',
-            'POST ' => 'transaction',
+            'POST ' => 'withdrawal',
         ],
     ],
     [
