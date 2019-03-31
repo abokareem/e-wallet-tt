@@ -1,53 +1,66 @@
 <?php
-
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\forms\Report */
 
-$this->title = 'My Yii Application';
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $queryParams array */
+
+use yii\grid\GridView;
+use yii\helpers\Html;
+
+$this->title = 'Report page';
 ?>
+
+
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => null,
+        'showFooter' => true,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            [
+                'attribute' => 'amount',
+                'value' => 'amount',
+                'footer' => array_sum(array_map(function ($model) {
+                    return $model->amount;
+                }, $dataProvider->models)),
+            ],
+            [
+                'attribute' => 'amount_in_usd',
+                'value' => 'amount_in_usd',
+                'footer' => array_sum(array_map(function ($model) {
+                    return $model->amount_in_usd;
+                }, $dataProvider->models)),
+            ],
+            [
+                'attribute' => 'wallet_from',
+                'value' => function ($model) {
+                    return $model->walletFrom ? $model->walletFrom->guid : 'replenish';
+                }
+            ],
+            [
+                'attribute' => 'wallet_to',
+                'value' => 'walletTo.guid'
+            ],
+            'time',
+            [
+                'attribute' => 'info',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::tag('pre', json_encode(json_decode($model->info), JSON_PRETTY_PRINT));
+                }
+            ],
+        ],
+    ]); ?>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+    <div class="pull-right">
+        <?= Html::a('<i class="glyphicon glyphicon-save-file"></i> JSON', ['/download/json'] + $queryParams, ['class' => 'btn btn-success', 'target' => '_blank'])?>
+        <?= Html::a('<i class="glyphicon glyphicon-save-file"></i> XML', ['/download/xml'] + $queryParams, ['class' => 'btn btn-warning', 'target' => '_blank'])?>
     </div>
 
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
 </div>
