@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=e_wallet_tt',
+    'dsn' => 'mysql:host=mysql;dbname=e_wallet_tt',
     'username' => 'root',
-    'password' => '',
+    'password' => 'MY_PASSWORD',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
