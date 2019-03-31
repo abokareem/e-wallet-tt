@@ -39,8 +39,7 @@ class Report extends Model
         $query = TransferLog::find()
             ->from(TransferLog::tableName() . ' tl')
             ->innerJoin(Wallet::tableName() . ' w', 'w.id = tl.wallet_from OR w.id = tl.wallet_to')
-            ->innerJoin(Client::tableName() . ' c', 'c.id = w.client_id')
-            ->andWhere(['w.client_id' => $this->clientId]);
+            ->innerJoin(Client::tableName() . ' c', 'c.id = w.client_id');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -48,13 +47,18 @@ class Report extends Model
 
         $this->load($params);
 
+
         if (!$this->validate()) {
+            $query->andWhere('1 = 0');
             return $dataProvider;
         }
 
         $query->andFilterWhere(['>=', 'tl.time', $this->timeFrom])
             ->andFilterWhere(['<=', 'tl.time', $this->timeTo])
-            ->andFilterWhere(['w.id' => $this->walletId]);
+            ->andFilterWhere([
+                'w.client_id' => $this->clientId,
+                'w.id' => $this->walletId
+            ]);
 
         return $dataProvider;
     }

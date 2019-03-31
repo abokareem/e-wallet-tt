@@ -30,4 +30,5 @@ return [
             'POST ' => 'update',
         ],
     ],
+    'download/<format:\w+>' => 'site/download'
 ];

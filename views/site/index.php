@@ -3,6 +3,7 @@
 /* @var $searchModel app\models\forms\Report */
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $queryParams array */
 
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -42,7 +43,10 @@ $this->title = 'Report page';
                     return $model->walletFrom ? $model->walletFrom->guid : 'replenish';
                 }
             ],
-            'walletTo.guid',
+            [
+                'attribute' => 'wallet_to',
+                'value' => 'walletTo.guid'
+            ],
             'time',
             [
                 'attribute' => 'info',
@@ -53,5 +57,10 @@ $this->title = 'Report page';
             ],
         ],
     ]); ?>
+
+    <div class="pull-right">
+        <?= Html::a('<i class="glyphicon glyphicon-save-file"></i> JSON', ['/download/json'] + $queryParams, ['class' => 'btn btn-success', 'target' => '_blank'])?>
+        <?= Html::a('<i class="glyphicon glyphicon-save-file"></i> XML', ['/download/xml'] + $queryParams, ['class' => 'btn btn-warning', 'target' => '_blank'])?>
+    </div>
 
 </div>
